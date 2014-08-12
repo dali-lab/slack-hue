@@ -30,7 +30,8 @@ var data = {
   on: true,
   hue: 65535
 };
-
+request.write(JSON.stringify(data));
+request.end();
 
 app.post('/', function(req,res){
 	
@@ -47,9 +48,7 @@ app.post('/', function(req,res){
 	else{
 		res.send('invalid command');	
 	}
-		
 	
-
 	
 });
 
