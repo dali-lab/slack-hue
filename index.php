@@ -1,5 +1,5 @@
 <?php //next eample will change status of specific conversation to resolve
-$service_url = 'http://example.com/api/conversations/cid123/status';
+$service_url = 'http://129.170.212.42/api/newdeveloper/groups/0/action';
 $ch = curl_init($service_url);
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
