@@ -18,6 +18,6 @@ $decoded = json_decode($response);
 if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
-echo "$ch";
+echo "{\"on\": true}";
 echo 'response ok!';
 var_export($decoded->response);?>
