@@ -67,7 +67,7 @@ function lightWithDataAndNumber(data,number){
 	var options2 = {
 	  host: '129.170.212.42',
 	  port: 80,
-	  path: '/api/newdeveloper/lights/number/state',
+	  path: '/api/newdeveloper/lights/'+number+'/state',
 	  method: 'PUT'
 	};
 	
