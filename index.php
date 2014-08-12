@@ -4,7 +4,7 @@ $ch = curl_init($service_url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
-$data = array("on" => false);
+// $data = array("on" => false);
 curl_setopt($ch, CURLOPT_POSTFIELDS,"{\"on\": true}");
 $response = curl_exec($ch);
 if ($response === false) {
@@ -18,5 +18,6 @@ $decoded = json_decode($response);
 if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
+echo "$ch";
 echo 'response ok!';
 var_export($decoded->response);?>
