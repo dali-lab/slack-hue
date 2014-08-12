@@ -1,0 +1,19 @@
+{
+  "name": "dali-lights",
+  "version": "0.0.0",
+  "description": "",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@heroku.com:dali-lights.git "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.8.3",
+    "logfmt": "^1.1.2"
+  }
+}
