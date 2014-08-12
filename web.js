@@ -31,8 +31,12 @@ request.on('error', function(e) {
   console.log('problem with request: ' + e.message);
 });
 request.end();
-var data = {
+var onData = {
   on: true,
+  hue: 65535
+};
+var offData = {
+  on: false,
   hue: 65535
 };
 // request.write(JSON.stringify(data));
@@ -43,14 +47,13 @@ app.post('/', function(req,res){
 	var text = req.body.text;
 	if( text =='on') {
 		// write data to request body
-		request.on('error', function(e) {
-		  console.log('problem with request: ' + e.message);
-		});
-		request.write(JSON.stringify(data));
+		request.write(JSON.stringify(onData));
 		request.end();
 		res.send('lights on');	
 	}
 	else if (text == 'off'){
+		request.write(JSON.stringify(offData));
+		request.end();
 		res.send('lights off');	
 	}
 	else{
