@@ -53,7 +53,7 @@ var dimData = {
 };
 
 var blueData = {
-	hue: 46920;
+	hue: 46920
 };
 // request.write(JSON.stringify(data));
 // request.end();
