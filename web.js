@@ -133,7 +133,7 @@ app.post('/', function(req,res){
 	else if (text == 'test'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
-		lightWithDataAndNumber(blueData,1);
+		lightWithDataAndNumber(blueData,i);
 		}
 		res.send('test')
 	}
