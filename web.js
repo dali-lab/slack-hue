@@ -36,6 +36,8 @@ request.end();
 app.post('/', function(req,res){
 	
 	var text = req.body.text;
+    console.log(req.body);
+	
 	if( text =='on') {
 		// write data to request body
 		request.write(JSON.stringify(data));
