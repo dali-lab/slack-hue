@@ -52,7 +52,7 @@ var dimData = {
   bri: 100,
 };
 
-var blue = {
+var blueData = {
 	hue: 46920;
 };
 // request.write(JSON.stringify(data));
@@ -70,6 +70,7 @@ function lightWithDataAndNumber(data,number){
 	  path: '/api/newdeveloper/lights/number/state',
 	  method: 'PUT'
 	};
+	
 	var request = http.request(options2, function(res) {
 	  console.log('STATUS: ' + res.statusCode);
 	  console.log('HEADERS: ' + JSON.stringify(res.headers));
@@ -130,7 +131,7 @@ app.post('/', function(req,res){
 		res.send('shady');	
 	}
 	else if (text == 'test'){
-		lightWithDataAndNumber(blue,1);
+		lightWithDataAndNumber(blueData,1);
 		res.send('test')
 	}
 	else{
