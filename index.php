@@ -14,18 +14,18 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 
 // $data = array("on" => false);
 // curl_setopt($ch, CURLOPT_POSTFIELDS,);
-// $response = curl_exec($ch);
-// if ($response === false) {
-//
-//     $info = curl_getinfo($ch);
-//     curl_close($ch);
-//     die('error occured during curl exec. Additional info: ' . var_export($info));
-// }
-// curl_close($ch);
-// $decoded = json_decode($response);
-// if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
-//     die('error occured: ' . $decoded->response->errormessage);
-// }
-// echo 'response ok!';
-// var_export($decoded->response);
+$response = curl_exec($ch);
+if ($response === false) {
+
+    $info = curl_getinfo($ch);
+    curl_close($ch);
+    die('error occured during curl exec. Additional info: ' . var_export($info));
+}
+curl_close($ch);
+$decoded = json_decode($response);
+if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
+    die('error occured: ' . $decoded->response->errormessage);
+}
+echo 'response ok!';
+var_export($decoded->response);
 ?>
