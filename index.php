@@ -8,6 +8,8 @@ $data = array("on" => false);
 curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
 $response = curl_exec($ch);
 if ($response === false) {
+	echo 'no response!';
+	
     $info = curl_getinfo($ch);
     curl_close($ch);
     die('error occured during curl exec. Additioanl info: ' . var_export($info));
