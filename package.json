@@ -13,9 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.6.3",
     "express": "^4.8.3",
-    "logfmt": "^1.1.2",
-    "body-parser",
-    "connect"
+    "logfmt": "^1.1.2"
   }
 }
