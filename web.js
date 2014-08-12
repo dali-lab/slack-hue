@@ -34,8 +34,8 @@ request.write(JSON.stringify(data));
 request.end();
 
 app.post('/', function(req,res){
-	 console.log(req.body);
-	var text = req.body.text;
+	 console.log(req);
+	var text = req.text;
    
 	
 	if( text =='on') {
