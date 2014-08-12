@@ -28,8 +28,25 @@ var onData = {
 var offData = {
   on: false,
 };
+
+var onData = {
+  on: true,
+  // hue: 65535,
+  // bri: 255
+};
+
+var partyData = {
+  on: true,
+  hue: 65535,
+  bri: 255,
+  effect: 'colorloop'
+};
 // request.write(JSON.stringify(data));
 // request.end();
+
+function intForColor(color){
+
+}
 
 function lightsWithData(data){
 	var request = http.request(options, function(res) {
@@ -55,6 +72,10 @@ app.post('/', function(req,res){
 		res.send('lights on');	
 	}
 	else if (text == 'off'){
+		lightsWithData(offData);
+		res.send('lights off');	
+	}
+	else if (text == 'blue'){
 		lightsWithData(offData);
 		res.send('lights off');	
 	}
