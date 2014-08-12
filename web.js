@@ -37,7 +37,6 @@ app.post('/', function(req,res){
 	req.write(JSON.stringify(data));
 	req.end();
 	
-	
     res.send('Hello Poster!');	
 });
 
