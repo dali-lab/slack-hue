@@ -19,6 +19,4 @@ if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') 
     die('error occured: ' . $decoded->response->errormessage);
 }
 echo 'response ok!';
-echo $data;
-echo "$ch";
 var_export($decoded->response);?>
