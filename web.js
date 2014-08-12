@@ -18,19 +18,8 @@ var options = {
   method: 'PUT'
 };
 
-var request = http.request(options, function(res) {
-  console.log('STATUS: ' + res.statusCode);
-  console.log('HEADERS: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    console.log('BODY: ' + chunk);
-  });
-});
 
-request.on('error', function(e) {
-  console.log('problem with request: ' + e.message);
-});
-request.end();
+
 var onData = {
   on: true,
   hue: 65535
@@ -47,8 +36,21 @@ app.post('/', function(req,res){
 	var text = req.body.text;
 	if( text =='on') {
 		// write data to request body
+		var request = http.request(options, function(res) {
+		  console.log('STATUS: ' + res.statusCode);
+		  console.log('HEADERS: ' + JSON.stringify(res.headers));
+		  res.setEncoding('utf8');
+		  res.on('data', function (chunk) {
+		    console.log('BODY: ' + chunk);
+		  });
+		});
+
+		request.on('error', function(e) {
+		  console.log('problem with request: ' + e.message);
+		});
 		request.write(JSON.stringify(onData));
 		request.end();
+		
 		res.send('lights on');	
 	}
 	else if (text == 'off'){
