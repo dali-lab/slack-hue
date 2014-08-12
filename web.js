@@ -30,13 +30,13 @@ var request = http.request(options, function(res) {
 request.on('error', function(e) {
   console.log('problem with request: ' + e.message);
 });
-
+request.end();
 var data = {
   on: true,
   hue: 65535
 };
-request.write(JSON.stringify(data));
-request.end();
+// request.write(JSON.stringify(data));
+// request.end();
 
 app.post('/', function(req,res){
 	
