@@ -55,8 +55,7 @@ app.post('/', function(req,res){
 		res.send('lights on');	
 	}
 	else if (text == 'off'){
-		request.write(JSON.stringify(offData));
-		request.end();
+		lightsWithData(offData);
 		res.send('lights off');	
 	}
 	else{
