@@ -33,11 +33,24 @@ var data = {
 
 
 app.post('/', function(req,res){
-	// write data to request body
-	request.write(JSON.stringify(data));
-	request.end();
 	
-	res.send('Hello POST!');	
+	var text = req.body.text;
+	if( text =='on' {
+		// write data to request body
+		request.write(JSON.stringify(data));
+		request.end();
+		res.send('lights on');	
+	}
+	else if (text == 'off'){
+		res.send('lights off');	
+	}
+	else{
+		res.send('invalid command');	
+	}
+		
+	
+
+	
 });
 
 app.get('/', function(req, res) {
