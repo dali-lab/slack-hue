@@ -92,15 +92,15 @@ app.post('/', function(req,res){
 		res.send('party!');	
 	}
 	else if (text == 'dim'){
-		lightsWithData(brightData);
+		lightsWithData(dimData);
 		res.send('dimmed ;)');	
 	}
 	else if (text == 'bright'){
-		lightsWithData(mediumBrightData);
+		lightsWithData(brightData);
 		res.send('bightened');	
 	}
 	else if (text == 'shady'){
-		lightsWithData(mediumBright);
+		lightsWithData(mediumBrightData);
 		res.send('shady');	
 	}
 	else{
