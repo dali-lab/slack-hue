@@ -31,26 +31,28 @@ var offData = {
 // request.write(JSON.stringify(data));
 // request.end();
 
+function lightsWithData(data){
+	var request = http.request(options, function(res) {
+	  console.log('STATUS: ' + res.statusCode);
+	  console.log('HEADERS: ' + JSON.stringify(res.headers));
+	  res.setEncoding('utf8');
+	  res.on('data', function (chunk) {
+	    console.log('BODY: ' + chunk);
+	  });
+	});
+	request.on('error', function(e) {
+	  console.log('problem with request: ' + e.message);
+	});
+	request.write(JSON.stringify(data));
+	request.end();
+	
+}
+
 app.post('/', function(req,res){
 	
 	var text = req.body.text;
-	if( text =='on') {
-		// write data to request body
-		var request = http.request(options, function(res) {
-		  console.log('STATUS: ' + res.statusCode);
-		  console.log('HEADERS: ' + JSON.stringify(res.headers));
-		  res.setEncoding('utf8');
-		  res.on('data', function (chunk) {
-		    console.log('BODY: ' + chunk);
-		  });
-		});
-
-		request.on('error', function(e) {
-		  console.log('problem with request: ' + e.message);
-		});
-		request.write(JSON.stringify(onData));
-		request.end();
-		
+	if( text =='on') {		
+		lightsWithData(onData);
 		res.send('lights on');	
 	}
 	else if (text == 'off'){
