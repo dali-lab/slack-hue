@@ -2,6 +2,7 @@
 $service_url = 'http://129.170.212.42/api/newdeveloper/groups/0/action';
 $ch = curl_init($service_url);
 $json = "{\"on\": \"true\"}";
+curl_setopt($ch, CURLOPT_URL, $service_url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json', 'Content-Length: ' . strlen($json), 'X-HTTP-Method-Override: PUT'));
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
