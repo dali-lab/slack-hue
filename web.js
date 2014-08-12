@@ -27,7 +27,7 @@ req.on('error', function(e) {
 });
 
 var data = {
-  on: true,
+  on: false,
 };
 // write data to request body
 req.write(JSON.stringify(data));
