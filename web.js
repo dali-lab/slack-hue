@@ -34,7 +34,7 @@ request.write(JSON.stringify(data));
 request.end();
 
 app.post('/', function(req,res){
-	 console.log(req);
+	 console.log(req.text);
 	var text = req.text;
    
 	
