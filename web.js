@@ -37,7 +37,7 @@ var onData = {
 
 var partyData = {
   on: true,
-  hue: 65535,
+  hue: 40000,
   bri: 255,
   effect: 'colorloop'
 };
@@ -75,9 +75,9 @@ app.post('/', function(req,res){
 		lightsWithData(offData);
 		res.send('lights off');	
 	}
-	else if (text == 'blue'){
-		lightsWithData(offData);
-		res.send('lights off');	
+	else if (text == 'party'){
+		lightsWithData(partyData);
+		res.send('party!');	
 	}
 	else{
 		res.send('invalid command');	
