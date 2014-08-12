@@ -1,8 +1,9 @@
+var connect = require('connect')
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded()); // to support URL-encoded bodies
 var http = require('http'); //the variable doesn't necessarily have to be named http
 
 app.use(logfmt.requestLogger());

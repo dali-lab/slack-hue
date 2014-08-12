@@ -14,6 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.8.3",
-    "logfmt": "^1.1.2"
+    "logfmt": "^1.1.2",
+    "body-parser",
+    "connect"
   }
 }
