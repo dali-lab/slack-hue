@@ -43,6 +43,9 @@ app.post('/', function(req,res){
 	var text = req.body.text;
 	if( text =='on') {
 		// write data to request body
+		request.on('error', function(e) {
+		  console.log('problem with request: ' + e.message);
+		});
 		request.write(JSON.stringify(data));
 		request.end();
 		res.send('lights on');	
