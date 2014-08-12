@@ -21,21 +21,21 @@ var request = http.request(options, function(res) {
     console.log('BODY: ' + chunk);
   });
 });
+
+req.on('error', function(e) {
+  console.log('problem with request: ' + e.message);
+});
+
 var data = {
   on: true,
   hue: 65535
 };
-
+// write data to request body
+req.write(JSON.stringify(data));
+req.end();
 
 app.post('/', function(req,res){
     
-	request.on('error', function(e) {
-	  console.log('problem with request: ' + e.message);
-	});
-	// write data to request body
-	request.write(JSON.stringify(data));
-	request.end();
-	
 	res.send('Hello POST!');	
 });
 
