@@ -22,7 +22,7 @@ var request = http.request(options, function(res) {
   });
 });
 
-req.on('error', function(e) {
+request.on('error', function(e) {
   console.log('problem with request: ' + e.message);
 });
 
@@ -31,8 +31,8 @@ var data = {
   hue: 65535
 };
 // write data to request body
-req.write(JSON.stringify(data));
-req.end();
+request.write(JSON.stringify(data));
+request.end();
 
 app.post('/', function(req,res){
     
