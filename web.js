@@ -7,9 +7,9 @@ app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
 // app.use(express.json());       // to support JSON-encoded bodies
 // app.use(express.urlencoded()); // to support URL-encoded bodies
 var http = require('http'); //the variable doesn't necessarily have to be named http
-
 app.use(logfmt.requestLogger());
 
+var NUM_LIGHTS = 15;
 
 var options = {
   host: '129.170.212.42',
@@ -17,8 +17,6 @@ var options = {
   path: '/api/newdeveloper/groups/0/action',
   method: 'PUT'
 };
-
-
 
 var onData = {
   on: true,
@@ -53,12 +51,40 @@ var dimData = {
   on: true,
   bri: 100,
 };
+
+var blue = {
+	hue: 46920;
+};
 // request.write(JSON.stringify(data));
 // request.end();
 
 function intForColor(color){
 
 }
+
+function lightWithDataAndNumber(data,number){
+	
+	var options2 = {
+	  host: '129.170.212.42',
+	  port: 80,
+	  path: '/api/newdeveloper/lights/number/state',
+	  method: 'PUT'
+	};
+	var request = http.request(options2, function(res) {
+	  console.log('STATUS: ' + res.statusCode);
+	  console.log('HEADERS: ' + JSON.stringify(res.headers));
+	  res.setEncoding('utf8');
+	  res.on('data', function (chunk) {
+	    console.log('BODY: ' + chunk);
+	  });
+	});
+	request.on('error', function(e) {
+	  console.log('problem with request: ' + e.message);
+	});
+	request.write(JSON.stringify(data));
+	request.end();	
+}
+
 
 function lightsWithData(data){
 	var request = http.request(options, function(res) {
@@ -102,6 +128,10 @@ app.post('/', function(req,res){
 	else if (text == 'shady'){
 		lightsWithData(mediumBrightData);
 		res.send('shady');	
+	}
+	else if (text == 'test'){
+		function lightWithDataAndNumber(blue,1);
+		res.send('test');	
 	}
 	else{
 		res.send('invalid command');	
