@@ -27,7 +27,9 @@ req.on('error', function(e) {
 });
 
 var data = {
-  on: false,
+  on: true,
+  hue: 3000,
+  colorloop: true;
 };
 // write data to request body
 req.write(JSON.stringify(data));
