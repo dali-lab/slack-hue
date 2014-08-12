@@ -28,12 +28,15 @@ req.on('error', function(e) {
 
 var data = {
   on: true,
-  hue: 1000
+  hue: 65535
 };
 // write data to request body
 req.write(JSON.stringify(data));
 req.end();
 
+app.post('/', function(req,res){
+    res.send('Hello Poster!');	
+});
 
 app.get('/', function(req, res) {
   res.send('Hello World!');
