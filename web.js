@@ -131,7 +131,10 @@ app.post('/', function(req,res){
 		res.send('shady');	
 	}
 	else if (text == 'test'){
+		
+		for(i =0; i<NUM_LIGHTS; i++){	
 		lightWithDataAndNumber(blueData,1);
+		}
 		res.send('test')
 	}
 	else{
