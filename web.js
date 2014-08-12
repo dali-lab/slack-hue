@@ -37,9 +37,21 @@ var onData = {
 
 var partyData = {
   on: true,
-  hue: 40000,
-  bri: 255,
   effect: 'colorloop'
+};
+
+var brightData = {
+  on: true,
+  bri: 255,
+};
+var mediumBrightData = {
+  on: true,
+  bri: 200,
+};
+
+var dimData = {
+  on: true,
+  bri: 100,
 };
 // request.write(JSON.stringify(data));
 // request.end();
@@ -78,6 +90,18 @@ app.post('/', function(req,res){
 	else if (text == 'party'){
 		lightsWithData(partyData);
 		res.send('party!');	
+	}
+	else if (text == 'dim'){
+		lightsWithData(brightData);
+		res.send('dimmed ;)');	
+	}
+	else if (text == 'bright'){
+		lightsWithData(mediumBrightData);
+		res.send('bightened');	
+	}
+	else if (text == 'shady'){
+		lightsWithData(mediumBright);
+		res.send('shady');	
 	}
 	else{
 		res.send('invalid command');	
