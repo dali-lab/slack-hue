@@ -52,6 +52,11 @@ var dimData = {
   bri: 100,
 };
 
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 var blueData = {
 	hue: 46920
 };
@@ -133,7 +138,11 @@ app.post('/', function(req,res){
 	else if (text == 'test'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
-		lightWithDataAndNumber(blueData,i);
+			
+			var tempData = {
+				hue: getRandomArbitrary(0,65535)
+			};
+		lightWithDataAndNumber(tempData,i);
 		}
 		res.send('test')
 	}
