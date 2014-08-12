@@ -130,8 +130,8 @@ app.post('/', function(req,res){
 		res.send('shady');	
 	}
 	else if (text == 'test'){
-		function lightWithDataAndNumber(blue,1);
-		res.send('test');	
+		lightWithDataAndNumber(blue,1);
+		res.send('test')
 	}
 	else{
 		res.send('invalid command');	
