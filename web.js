@@ -9,7 +9,7 @@ app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
 var http = require('http'); //the variable doesn't necessarily have to be named http
 app.use(logfmt.requestLogger());
 
-var NUM_LIGHTS = 20;
+var NUM_LIGHTS = 200;
 
 var options = {
   host: '129.170.212.42',
