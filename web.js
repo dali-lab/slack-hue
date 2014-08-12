@@ -22,11 +22,11 @@ var options = {
 
 var onData = {
   on: true,
-  hue: 65535
+  // hue: 65535,
+  // bri: 255
 };
 var offData = {
   on: false,
-  hue: 65535
 };
 // request.write(JSON.stringify(data));
 // request.end();
@@ -45,7 +45,6 @@ function lightsWithData(data){
 	});
 	request.write(JSON.stringify(data));
 	request.end();
-	
 }
 
 app.post('/', function(req,res){
