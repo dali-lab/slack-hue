@@ -5,7 +5,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 $data = array("on" => false);
-curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+curl_setopt($ch, CURLOPT_POSTFIELDS,"{\"on\": true}");
 $response = curl_exec($ch);
 if ($response === false) {
 		
