@@ -4,7 +4,7 @@ $ch = curl_init($service_url);
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-$data = array("on" => false);
+$data = array(false => "on");
 curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
 $response = curl_exec($ch);
 if ($response === false) {
