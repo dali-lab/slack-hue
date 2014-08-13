@@ -52,6 +52,11 @@ var dimData = {
   bri: 100,
 };
 
+var redData = {
+  on: true,
+  hue:0
+};
+
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -134,6 +139,10 @@ app.post('/', function(req,res){
 	else if (text == 'shady'){
 		lightsWithData(mediumBrightData);
 		res.send('shady');	
+	}
+	else if (text == 'red'){
+		lightsWithData(redData);
+		res.send('red');	
 	}
 	else if (text == 'test'){
 		
