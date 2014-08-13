@@ -147,6 +147,10 @@ app.post('/', function(req,res){
 		lightsWithData(redData);
 		res.send('red');	
 	}
+	else if (text == 'blue'){
+		lightsWithData(blueData);
+		res.send('blue');	
+	}
 	else if (text == 'test'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
