@@ -223,7 +223,7 @@ app.post('/', function(req,res){
 		res.send('~*$random!@#~')
 	}
 	else{
-		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, sauron, party, pulse');	
+		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, sauron, party, pulse, tv');	
 	}
 	
 	
@@ -234,7 +234,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/tv/', function(req, res) {
-  res.send('{'+shouldTV+'}');
+  res.send(shouldTV);
 });
 
 var port = Number(process.env.PORT || 5000);
