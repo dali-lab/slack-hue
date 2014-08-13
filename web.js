@@ -161,7 +161,7 @@ app.post('/', function(req,res){
 				hue: 20000,
 				sat: 255
 			};
-		lightWithDataAndNumber(tempData,i);
+		lightWithDataAndNumber(blueData,i);
 		}
 		res.send('test')
 	}
