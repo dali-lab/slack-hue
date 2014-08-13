@@ -53,24 +53,32 @@ var dimData = {
 var redData = {
   on: true,
   hue:0,
-  sat: 255
+  sat: 255,
+  effect: 'none'
 };
 
 var orangeData = {
   on: true,
   hue:13000,
-  sat: 255
+  sat: 255,
+  effect: 'none'
 };
 var greenData = {
   on: true,
   hue:25500,
-  sat: 255
+  sat: 255,
+  effect: 'none'
+};
+
+var pulseData = {
+  alert: 'lselect'
 };
 
 var normalData = {
 	  on: true,
 	  hue:15000,
-	  sat: 200
+	  sat: 200,
+	  effect: 'none'
 }
 
 function getRandomArbitrary(min, max) {
@@ -187,6 +195,10 @@ app.post('/', function(req,res){
 		lightsWithData(purpleData);
 		res.send('purple');	
 	}
+	else if (text == 'pulse'){
+		lightsWithData(pulseData);
+		res.send('pulse');	
+	}
 	else if (text == 'random'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
@@ -201,7 +213,7 @@ app.post('/', function(req,res){
 		res.send('~*$random!@#~')
 	}
 	else{
-		res.send('commands: on, off, random, dim, shady, bright, orange, blue, party');	
+		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, sauron, party, pulse');	
 	}
 	
 	
