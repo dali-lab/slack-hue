@@ -223,8 +223,21 @@ app.post('/', function(req,res){
 		}
 		res.send('~*$random!@#~')
 	}
+	else if (text == 'colors'){
+		
+		for(i =0; i<NUM_LIGHTS; i++){	
+			var tempData = {
+				on: true,
+				hue: getRandomArbitrary(0,65535),
+				sat: getRandomArbitrary(220,255)
+			};
+			console.log(tempData);
+		lightWithDataAndNumber(tempData	,i);
+		}
+		res.send('~*$random colors!@#~')
+	}
 	else{
-		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, sauron, party, pulse, tv');	
+		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
 	}
 	
 	
