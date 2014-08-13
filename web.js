@@ -55,6 +55,7 @@ var dimData = {
 var redData = {
   on: true,
   hue:0
+  sat: 255
 };
 
 
@@ -63,7 +64,9 @@ function getRandomArbitrary(min, max) {
 }
 
 var blueData = {
+    on: true,
 	hue: 46920
+	sat: 255
 };
 // request.write(JSON.stringify(data));
 // request.end();
