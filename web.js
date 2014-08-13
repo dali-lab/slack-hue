@@ -162,6 +162,7 @@ app.post('/', function(req,res){
 				hue: getRandomArbitrary(0,65535),
 				sat: getRandomArbitrary(0,255)
 			};
+			console.log(tempData);
 		lightWithDataAndNumber(tempData	,i);
 		}
 		res.send('test')
