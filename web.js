@@ -149,10 +149,7 @@ function lightsWithData(data){
 
 app.post('/', function(req,res){
 	
-	if (text == 'tv'){
-		shouldTV = true
-	}
-	else{
+	if (text != 'tv'){
 		shouldTV = false
 	}
 	
@@ -160,6 +157,9 @@ app.post('/', function(req,res){
 	if( text =='on') {		
 		lightsWithData(onData);
 		res.send('lights on');	
+	}
+	else if (text == 'tv'){
+		shouldTV = true
 	}
 	else if (text == 'off'){
 		lightsWithData(offData);
