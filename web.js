@@ -158,10 +158,11 @@ app.post('/', function(req,res){
 			// hue: getRandomArbitrary(0,65535),
 		// 	sat: getRandomArbitrary(0,255)
 			var tempData = {
-				hue: 20000,
+				on: true,
+				hue: 10000,
 				sat: 255
 			};
-		lightWithDataAndNumber(blueData,i);
+		lightWithDataAndNumber(tempData	,i);
 		}
 		res.send('test')
 	}
