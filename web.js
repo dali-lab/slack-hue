@@ -44,13 +44,13 @@ var brightData = {
 };
 var mediumBrightData = {
   on: true,
-  bri: 200,
+  bri: 203,
   
 };
 
 var lessDimData = {
   on: true,
-  bri: 150,
+  bri: 155,
   
 };
 
