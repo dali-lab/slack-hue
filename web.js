@@ -38,9 +38,14 @@ var partyData = {
   effect: 'colorloop',
 };
 
-var brightData = {
+var veryBrightData = {
   on: true,
   bri: 255,
+};
+
+var brightData = {
+  on: true,
+  bri: 240,
 };
 var mediumBrightData = {
   on: true,
@@ -180,7 +185,7 @@ app.post('/', function(req,res){
 		lightsWithData(lessDimData);
 		res.send('dimmed');	
 	}
-	else if (text == 'dimmer'){
+	else if (text == 'very dim'){
 		lightsWithData(dimData);
 		res.send('dimmed ;)');	
 	}
@@ -195,6 +200,10 @@ app.post('/', function(req,res){
 	else if (text == 'bright'){
 		lightsWithData(brightData);
 		res.send('bightened');	
+	}
+	else if (text == 'very bright'){
+		lightsWithData(veryBrightData);
+		res.send('bightened!!');	
 	}
 	else if (text == 'sauron'){
 		lightsWithData(redData);
@@ -251,7 +260,7 @@ app.post('/', function(req,res){
 		res.send('~*$random colors!@#~')
 	}
 	else{
-		res.send('/lights commands: on, off, random, dim, dimmer, shady, bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
+		res.send('/lights commands: on, off, random, dim, very dim, shady, bright, very bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
 	}
 	
 	
