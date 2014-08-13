@@ -160,7 +160,7 @@ app.post('/', function(req,res){
 			var tempData = {
 				on: true,
 				hue: getRandomArbitrary(0,65535),
-				sat: getRandomArbitrary(0,255)
+				sat: getRandomArbitrary(100,255)
 			};
 			console.log(tempData);
 		lightWithDataAndNumber(tempData	,i);
