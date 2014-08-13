@@ -143,20 +143,17 @@ app.post('/', function(req,res){
 		lightsWithData(mediumBrightData);
 		res.send('shady');	
 	}
-	else if (text == 'red'){
+	else if (text == 'orange'){
 		lightsWithData(redData);
-		res.send('red');	
+		res.send('orange');	
 	}
 	else if (text == 'blue'){
 		lightsWithData(blueData);
 		res.send('blue');	
 	}
-	else if (text == 'test'){
+	else if (text == 'random'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
-			
-			// hue: getRandomArbitrary(0,65535),
-		// 	sat: getRandomArbitrary(0,255)
 			var tempData = {
 				on: true,
 				hue: getRandomArbitrary(0,65535),
@@ -165,10 +162,10 @@ app.post('/', function(req,res){
 			console.log(tempData);
 		lightWithDataAndNumber(tempData	,i);
 		}
-		res.send('test')
+		res.send('~*$random!@#~')
 	}
 	else{
-		res.send('invalid command');	
+		res.send('commands: on, off, random, dim, shady, bright, orange, blue, party');	
 	}
 	
 	
