@@ -18,7 +18,7 @@ var options = {
   method: 'PUT'
 };
 
-var shouldTV;
+var shouldTV = false;
 
 var onData = {
   on: true,
@@ -31,19 +31,16 @@ var offData = {
 
 var onData = {
   on: true,
-  shouldTV = false
 };
 
 var partyData = {
   on: true,
   effect: 'colorloop',
-  shouldTV = false
 };
 
 var brightData = {
   on: true,
   bri: 255,
-  shouldTV = false
 };
 var mediumBrightData = {
   on: true,
@@ -68,14 +65,12 @@ var orangeData = {
   hue:13000,
   sat: 255,
   effect: 'none',
-  shouldTV = false
 };
 var greenData = {
   on: true,
   hue:25500,
   sat: 255,
   effect: 'none',
-  shouldTV = false
 };
 
 var pulseData = {
@@ -87,7 +82,6 @@ var normalData = {
 	  hue:15000,
 	  sat: 200,
 	  effect: 'none',
-	  shouldTV = false
 }
 
 function getRandomArbitrary(min, max) {
@@ -98,14 +92,12 @@ var blueData = {
     on: true,
 	hue: 46920,
 	sat: 255,
-	shouldTV = false
 };
 
 var purpleData = {
     on: true,
 	hue: 50000,
 	sat: 255,
-	shouldTV = false
 };
 // request.write(JSON.stringify(data));
 // request.end();
@@ -156,6 +148,13 @@ function lightsWithData(data){
 }
 
 app.post('/', function(req,res){
+	
+	if (text == 'tv'){
+		shouldTV = true
+	}
+	else{
+		shouldTV = false
+	}
 	
 	var text = req.body.text;
 	if( text =='on') {		
@@ -209,9 +208,6 @@ app.post('/', function(req,res){
 	else if (text == 'pulse'){
 		lightsWithData(pulseData);
 		res.send('pulse');	
-	}
-	else if (text == 'tv'){
-		shouldTV = tv
 	}
 	else if (text == 'random'){
 		
