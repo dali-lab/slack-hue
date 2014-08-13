@@ -45,11 +45,11 @@ var veryBrightData = {
 
 var brightData = {
   on: true,
-  bri: 240,
+  bri: 230,
 };
 var mediumBrightData = {
   on: true,
-  bri: 203,
+  bri: 200,
   
 };
 
