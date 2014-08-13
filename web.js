@@ -156,7 +156,8 @@ app.post('/', function(req,res){
 		for(i =0; i<NUM_LIGHTS; i++){	
 			
 			var tempData = {
-				hue: getRandomArbitrary(0,65535)
+				hue: getRandomArbitrary(0,65535),
+				sat: getRandomArbitrary(0,255)
 			};
 		lightWithDataAndNumber(tempData,i);
 		}
