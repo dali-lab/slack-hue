@@ -48,6 +48,12 @@ var mediumBrightData = {
   
 };
 
+var lessDimData = {
+  on: true,
+  bri: 150,
+  
+};
+
 var dimData = {
   on: true,
   bri: 100,
@@ -171,16 +177,24 @@ app.post('/', function(req,res){
 		res.send('party!');	
 	}
 	else if (text == 'dim'){
+		lightsWithData(lessDimData);
+		res.send('dimmed');	
+	}
+	else if (text == 'dimmer'){
 		lightsWithData(dimData);
 		res.send('dimmed ;)');	
-	}
-	else if (text == 'bright'){
-		lightsWithData(brightData);
-		res.send('bightened');	
 	}
 	else if (text == 'shady'){
 		lightsWithData(mediumBrightData);
 		res.send('shady');	
+	}
+	else if (text == 'shady'){
+		lightsWithData(mediumBrightData);
+		res.send('shady');	
+	}
+	else if (text == 'bright'){
+		lightsWithData(brightData);
+		res.send('bightened');	
 	}
 	else if (text == 'sauron'){
 		lightsWithData(redData);
