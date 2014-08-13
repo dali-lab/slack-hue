@@ -159,8 +159,8 @@ app.post('/', function(req,res){
 		// 	sat: getRandomArbitrary(0,255)
 			var tempData = {
 				on: true,
-				hue: 10000,
-				sat: 255
+				hue: getRandomArbitrary(0,65535),
+				sat: getRandomArbitrary(0,255)
 			};
 		lightWithDataAndNumber(tempData	,i);
 		}
