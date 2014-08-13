@@ -18,6 +18,8 @@ var options = {
   method: 'PUT'
 };
 
+var shouldTV;
+
 var onData = {
   on: true,
   // hue: 65535,
@@ -29,20 +31,24 @@ var offData = {
 
 var onData = {
   on: true,
+  shouldTV = false
 };
 
 var partyData = {
   on: true,
-  effect: 'colorloop'
+  effect: 'colorloop',
+  shouldTV = false
 };
 
 var brightData = {
   on: true,
   bri: 255,
+  shouldTV = false
 };
 var mediumBrightData = {
   on: true,
   bri: 200,
+  
 };
 
 var dimData = {
@@ -61,13 +67,15 @@ var orangeData = {
   on: true,
   hue:13000,
   sat: 255,
-  effect: 'none'
+  effect: 'none',
+  shouldTV = false
 };
 var greenData = {
   on: true,
   hue:25500,
   sat: 255,
-  effect: 'none'
+  effect: 'none',
+  shouldTV = false
 };
 
 var pulseData = {
@@ -78,7 +86,8 @@ var normalData = {
 	  on: true,
 	  hue:15000,
 	  sat: 200,
-	  effect: 'none'
+	  effect: 'none',
+	  shouldTV = false
 }
 
 function getRandomArbitrary(min, max) {
@@ -88,13 +97,15 @@ function getRandomArbitrary(min, max) {
 var blueData = {
     on: true,
 	hue: 46920,
-	sat: 255
+	sat: 255,
+	shouldTV = false
 };
 
 var purpleData = {
     on: true,
 	hue: 50000,
-	sat: 255
+	sat: 255,
+	shouldTV = false
 };
 // request.write(JSON.stringify(data));
 // request.end();
@@ -199,6 +210,9 @@ app.post('/', function(req,res){
 		lightsWithData(pulseData);
 		res.send('pulse');	
 	}
+	else if (text == 'tv'){
+		shouldTV = tv
+	}
 	else if (text == 'random'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
@@ -221,6 +235,10 @@ app.post('/', function(req,res){
 
 app.get('/', function(req, res) {
   res.send('Hello World!');
+});
+
+app.get('/tv/', function(req, res) {
+  res.send('{'+shouldTV+'}');
 });
 
 var port = Number(process.env.PORT || 5000);
