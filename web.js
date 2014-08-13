@@ -251,7 +251,7 @@ app.post('/', function(req,res){
 		res.send('~*$random colors!@#~')
 	}
 	else{
-		res.send('/lights commands: on, off, random, dim, shady, bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
+		res.send('/lights commands: on, off, random, dim, dimmer, shady, bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
 	}
 	
 	
