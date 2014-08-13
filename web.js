@@ -29,8 +29,6 @@ var offData = {
 
 var onData = {
   on: true,
-  // hue: 65535,
-  // bri: 255
 };
 
 var partyData = {
@@ -58,6 +56,22 @@ var redData = {
   sat: 255
 };
 
+var orangeData = {
+  on: true,
+  hue:13000,
+  sat: 255
+};
+var greenData = {
+  on: true,
+  hue:25500,
+  sat: 255
+};
+
+var normalData = {
+	  on: true,
+	  hue:15000,
+	  sat: 200
+}
 
 function getRandomArbitrary(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -66,6 +80,12 @@ function getRandomArbitrary(min, max) {
 var blueData = {
     on: true,
 	hue: 46920,
+	sat: 255
+};
+
+var purpleData = {
+    on: true,
+	hue: 50000,
 	sat: 255
 };
 // request.write(JSON.stringify(data));
@@ -143,13 +163,29 @@ app.post('/', function(req,res){
 		lightsWithData(mediumBrightData);
 		res.send('shady');	
 	}
-	else if (text == 'orange'){
+	else if (text == 'sauron'){
 		lightsWithData(redData);
-		res.send('orange');	
+		res.send('sauron');	
 	}
 	else if (text == 'blue'){
 		lightsWithData(blueData);
 		res.send('blue');	
+	}
+	else if (text == 'orange'){
+		lightsWithData(orangeData);
+		res.send('orange');	
+	}
+	else if (text == 'green'){
+		lightsWithData(greenData);
+		res.send('green');	
+	}
+	else if (text == 'normal'){
+		lightsWithData(normalData);
+		res.send('normal');	
+	}
+	else if (text == 'purple'){
+		lightsWithData(purpleData);
+		res.send('purple');	
 	}
 	else if (text == 'random'){
 		
