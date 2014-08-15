@@ -1,16 +1,19 @@
+// Nook Harquail
+// 
+
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
-// app.use(express.json());       // to support JSON-encoded bodies
-// app.use(express.urlencoded()); // to support URL-encoded bodies
 var http = require('http'); //the variable doesn't necessarily have to be named http
 app.use(logfmt.requestLogger());
 
+//the number of hue lights
 var NUM_LIGHTS = 15;
 
+//the ip address of the hue basestation.  dalights.cs.dartmouth.edu
 var options = {
   host: '129.170.212.42',
   port: 80,
@@ -22,9 +25,8 @@ var shouldTV = false;
 
 var onData = {
   on: true,
-  // hue: 65535,
-  // bri: 255
 };
+
 var offData = {
   on: false,
 };
@@ -262,7 +264,6 @@ app.post('/', function(req,res){
 	else{
 		res.send('/lights commands: on, off, random, very dim, dim, shady, bright, very bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
 	}
-	
 	
 });
 
