@@ -241,7 +241,7 @@ app.post('/', function(req,res){
 	}
 	else if (text == 'pulses'){
 		lightsWithData(pulseManyData);
-		res.send('pulse');	
+		res.send('pulses');	
 	}
 	else if (text == 'random'){
 		
