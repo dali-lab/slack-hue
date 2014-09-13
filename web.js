@@ -87,6 +87,10 @@ var greenData = {
 };
 
 var pulseData = {
+  alert: 'select'
+};
+
+var pulseManyData = {
   alert: 'lselect'
 };
 
@@ -235,6 +239,10 @@ app.post('/', function(req,res){
 		lightsWithData(pulseData);
 		res.send('pulse');	
 	}
+	else if (text == 'pulses'){
+		lightsWithData(pulseManyData);
+		res.send('pulse');	
+	}
 	else if (text == 'random'){
 		
 		for(i =0; i<NUM_LIGHTS; i++){	
@@ -262,7 +270,7 @@ app.post('/', function(req,res){
 		res.send('~*$random colors!@#~')
 	}
 	else{
-		res.send('/lights commands: on, off, random, very dim, dim, shady, bright, very bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, tv');	
+		res.send('/lights commands: on, off, random, very dim, dim, shady, bright, very bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, pulses tv');	
 	}
 	
 });
