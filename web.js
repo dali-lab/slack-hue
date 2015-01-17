@@ -166,6 +166,9 @@ function lightsWithData(data){
 
 app.post('/', function(req,res){
 	
+         console.log('body: '+req.body);
+         console.log('text :'+req.body.text);
+         
 	if (text != 'tv'){
 		shouldTV = false;
 	}
