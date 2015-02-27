@@ -217,7 +217,10 @@ app.post('/', function(req,res){
          }
          else if (text == 'off'){
          for(var i =0; i<lightsControlled.length; i++){
-         lightWithDataAndNumber(offData,lightsControlled[i]);
+         
+         setTimeout(function() {
+                    lightWithDataAndNumber(offData,lightsControlled[i]);
+                    }, i*100);
          }
          res.send('lights off');
          }
