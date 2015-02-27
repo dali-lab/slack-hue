@@ -4,6 +4,7 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
+var sleep = require('sleep');
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded() ); // to support URL-encoded bodies
@@ -217,10 +218,8 @@ app.post('/', function(req,res){
          }
          else if (text == 'off'){
          for(var i =0; i<lightsControlled.length; i++){
-         
-         setTimeout(function() {
+                    sleep.usleep(20);
                     lightWithDataAndNumber(offData,lightsControlled[i]);
-                    }, i*100);
          }
          res.send('lights off');
          }
