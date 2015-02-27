@@ -208,6 +208,7 @@ app.post('/', function(req,res){
          res.send('lights on');
 
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(onData,lightsControlled[i]);
          }
          
@@ -218,25 +219,28 @@ app.post('/', function(req,res){
          }
          else if (text == 'off'){
          for(var i =0; i<lightsControlled.length; i++){
-                    sleep.usleep(20);
+                    sleep.usleep(i*1000);
                     lightWithDataAndNumber(offData,lightsControlled[i]);
          }
          res.send('lights off');
          }
          else if (text == 'party'){
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(partyData,lightsControlled[i]);
          }
          res.send('party!');
          }
          else if (text == 'dim'){
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(lessDimData,lightsControlled[i]);
          }
          res.send('dimmed');
          }
          else if (text == 'very dim'){
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(dimData,lightsControlled[i]);
          }
          res.send('dimmed ;)');
@@ -244,6 +248,7 @@ app.post('/', function(req,res){
          else if (text == 'shady'){
          
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(mediumBrightData,lightsControlled[i]);
          }
          res.send('shady');
@@ -251,12 +256,14 @@ app.post('/', function(req,res){
          else if (text == 'bright'){
          
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(brightData,lightsControlled[i]);
          }
          res.send('bightened');
          }
          else if (text == 'very bright'){
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          lightWithDataAndNumber(veryBrightData,lightsControlled[i]);
          }
          res.send('bightened!!');
@@ -264,7 +271,8 @@ app.post('/', function(req,res){
          else if (text == 'sauron'){
          console.log("SAURON");
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(redData,lightsControlled[i]);
          }
          res.send('sauron');
@@ -272,7 +280,8 @@ app.post('/', function(req,res){
          else if (text == 'blue'){
          
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(blueData,lightsControlled[i]);
          }
          
@@ -280,7 +289,8 @@ app.post('/', function(req,res){
          }
          else if (text == 'orange'){
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(orangeData,lightsControlled[i]);
          }
          res.send('orange');
@@ -288,7 +298,8 @@ app.post('/', function(req,res){
          else if (text == 'green'){
          
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(greenData,lightsControlled[i]);
          }
          res.send('green');
@@ -297,7 +308,9 @@ app.post('/', function(req,res){
          else if (text == 'normal'){
          
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(normalData,lightsControlled[i]);
          }
          res.send('normal');
@@ -305,12 +318,14 @@ app.post('/', function(req,res){
          else if (text == 'purple'){
          
          for(var i =0; i<lightsControlled.length; i++){
-         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         sleep.usleep(i*1000);
+//         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
          lightWithDataAndNumber(purpleData,lightsControlled[i]);
          }
          res.send('purple');
          }
          else if (text == 'pulse'){
+         
          lightsWithData(pulseData);
          res.send('pulse');
          }
@@ -330,6 +345,7 @@ app.post('/', function(req,res){
          else if (text == 'random'){
          
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          var tempData = {
          on: true,
          hue: getRandomArbitrary(0,65535),
@@ -343,6 +359,7 @@ app.post('/', function(req,res){
          else if (text == 'colors'){
          
          for(var i =0; i<lightsControlled.length; i++){
+         sleep.usleep(i*1000);
          var tempData = {
          on: true,
          hue: getRandomArbitrary(0,65535),
