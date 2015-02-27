@@ -25,9 +25,9 @@ method: 'PUT'
 var shouldTV = false;
 
 //range of lights near oscar
-var oscarLights = [10,12,13,15,3,1];
+var oscarLights = [10,12,13,15,3,1,17,19,20];
 //range of lights near tv
-var tvLights = [9,11,6,5,4,2,0,7,8];
+var tvLights = [9,11,6,5,4,2,0,7,8,16,18,21];
 //range of lights in center
 var centerLights = [14];
 
@@ -235,7 +235,7 @@ app.post('/', function(req,res){
          }
          res.send('dimmed');
          }
-         else if (text == 'very dim'){
+         else if (text == 'dimmest'){
          for(var i =0; i<lightsControlled.length; i++){
          lightWithDataAndNumber(dimData,lightsControlled[i]);
          }
@@ -255,7 +255,7 @@ app.post('/', function(req,res){
          }
          res.send('bightened');
          }
-         else if (text == 'very bright'){
+         else if (text == 'brightest'){
          for(var i =0; i<lightsControlled.length; i++){
          lightWithDataAndNumber(veryBrightData,lightsControlled[i]);
          }
@@ -325,7 +325,7 @@ app.post('/', function(req,res){
          else if (text == 'sparkle'){
          
          for(i in lightsControlled){
-         lightWithDataAndNumber(pulseManyData,i);
+         lightWithDataAndNumber(pulseManyData,lightsControlled[i]);
          }
          res.send('sparkle');
          }
@@ -356,7 +356,7 @@ app.post('/', function(req,res){
          res.send('~*$random colors!@#~')
          }
          else{
-         res.send('/lights commands: on, off, random, very dim, dim, shady, bright, very bright, blue, green, orange, purple, normal, colors, sauron, party, pulse, pulses tv');
+         res.send('/lights commands: on, off, random, dimmest, dim, shady, bright, brightest, blue, green, orange, purple, normal, colors, sauron, party, pulse, pulses.  Choose the side of the room: /lights colors tv, /lights colors table, /lights colors oscar');
          }
          
          });
