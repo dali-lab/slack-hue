@@ -359,7 +359,7 @@ app.post('/', function(req,res){
          else if (text == 'colors'){
          
          for(var i =0; i<lightsControlled.length; i++){
-         sleep.usleep(i*1000);
+         sleep.usleep(i*100000);
          var tempData = {
          on: true,
          hue: getRandomArbitrary(0,65535),
