@@ -190,11 +190,11 @@ app.post('/', function(req,res){
          console.log("text2:"+ text2);
          var lightsControlled;
          switch(text2){
-            case "oscar": lightsControlled = oscarLights;   break;
+         case "oscar": lightsControlled = oscarLights;   break;
          case "tv": lightsControlled = tvLights; break;
          case "table": lightsControlled = centerLights; break;
-            default: lightsControlled = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-            break;
+         default: lightsControlled = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+         break;
          
          }
          
@@ -204,12 +204,12 @@ app.post('/', function(req,res){
          }
          
          if( text =='on') {
-         
+         res.send('lights on');
+
          for(var i =0; i<lightsControlled.length; i++){
          lightWithDataAndNumber(onData,lightsControlled[i]);
          }
          
-         res.send('lights on');
          }
          else if (text == 'tv'){
          shouldTV = true;
@@ -290,13 +290,13 @@ app.post('/', function(req,res){
          lightWithDataAndNumber(greenData,lightsControlled[i]);
          }
          res.send('green');
-
+         
          }
          else if (text == 'normal'){
          
          for(var i =0; i<lightsControlled.length; i++){
-            console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-            lightWithDataAndNumber(normalData,lightsControlled[i]);
+         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
+         lightWithDataAndNumber(normalData,lightsControlled[i]);
          }
          res.send('normal');
          }
