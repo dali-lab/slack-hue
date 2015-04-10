@@ -15,6 +15,9 @@ var hue = require("node-hue-api"),
   HueApi = hue.HueApi,
   lightState = hue.lightState;
 
+var nametoHex = require('colornames');
+var hexToRgb = require('hex-rgb');
+
 var displayResult = function(result) {
   console.log(JSON.stringify(result, null, 2));
 };
@@ -49,6 +52,32 @@ var shadyState = lightState.create().bri(150);
 var brightState = lightState.create().bri(200);
 var brightestState = lightState.create().bri(250);
 
+var pulseState = lightState.create().alertShort();
+var pulsesState = lightState.create().alertLong();
+
+
+
+function rgbToHsl(r, g, b){
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
+}
+
 app.post('/', function(req, res) {
 
   console.log('body: ' + req.body);
@@ -61,6 +90,7 @@ app.post('/', function(req, res) {
 
   //defines color
   var text = texts[0];
+  var hexFromText = nametoHex(text);
   console.log("COLOR:" + text);
   //defines lights controlled
   var text2 = texts[1];
@@ -82,6 +112,7 @@ app.post('/', function(req, res) {
 
   }
 
+  var intFromText = parseInt(text, 10)
 
   if (text != 'tv') {
     shouldTV = false;
@@ -98,142 +129,131 @@ app.post('/', function(req, res) {
     shouldTV = true;
     res.send('tv');
   } else if (text == 'off') {
-    
-   api.setGroupLightState(lightsControlled, offState ) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+
+    api.setGroupLightState(lightsControlled, offState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
     res.send('lights off');
   } else if (text == 'party') {
-   
-   api.setGroupLightState(lightsControlled, partyState ) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+
+    api.setGroupLightState(lightsControlled, partyState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
     res.send('party!');
   } else if (text == 'dim') {
-  
-   api.setGroupLightState(lightsControlled, dimState) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+
+    api.setGroupLightState(lightsControlled, dimState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
   } else if (text == 'dimmest') {
-    
-   api.setGroupLightState(lightsControlled, dimmestState) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+
+    api.setGroupLightState(lightsControlled, dimmestState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
     res.send('dimmed ;)');
   } else if (text == 'shady') {
 
-   api.setGroupLightState(lightsControlled, shadyState) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+    api.setGroupLightState(lightsControlled, shadyState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
     res.send('shady');
   } else if (text == 'bright') {
 
-   api.setGroupLightState(lightsControlled, brightState) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
-    
+    api.setGroupLightState(lightsControlled, brightState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
     res.send('bightened');
   } else if (text == 'brightest') {
-   api.setGroupLightState(lightsControlled, brightestState) // provide a value of false to turn off
-  .then(displayResult)
-    .fail(displayError)
-    .done();
+    api.setGroupLightState(lightsControlled, brightestState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
     res.send('bightened!!');
-  } else if (text == 'sauron') {
-    console.log("SAURON");
-    for (var i = 0; i < lightsControlled.length; i++) {
-      //         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-      lightWithDataAndNumber(redData, lightsControlled[i]);
-    }
-    res.send('sauron');
-  } else if (text == 'blue') {
+  } else if (!isNaN(intFromText)) {
 
-    for (var i = 0; i < lightsControlled.length; i++) {
-      //         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-      lightWithDataAndNumber(blueData, lightsControlled[i]);
-    }
+    var whiteState = lightState.create().on().white(500, 100);
 
-    res.send('blue');
-  } else if (text == 'orange') {
-    for (var i = 0; i < lightsControlled.length; i++) {
-      //         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-      lightWithDataAndNumber(orangeData, lightsControlled[i]);
-    }
-    res.send('orange');
-  } else if (text == 'green') {
+    api.setGroupLightState(lightsControlled, whiteState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
 
-    for (var i = 0; i < lightsControlled.length; i++) {
-      //         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-      lightWithDataAndNumber(greenData, lightsControlled[i]);
-    }
-    res.send('green');
-
+    res.send('set white point:' + intFromText);
   } else if (text == 'normal') {
-    
+
     api.setGroupLightState(lightsControlled, normalState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
     res.send('normal');
-  } else if (text == 'purple') {
-
-    for (var i = 0; i < lightsControlled.length; i++) {
-      //         console.log("\n\nTHIS IS I:\n"+lightsControlled[i]);
-      lightWithDataAndNumber(purpleData, lightsControlled[i]);
-    }
-    res.send('purple');
   } else if (text == 'pulse') {
 
-    lightsWithData(pulseData);
+    api.setGroupLightState(lightsControlled, pulseState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
     res.send('pulse');
   } else if (text == 'pulses') {
 
-    lightsWithData(pulseManyData);
-
+    api.setGroupLightState(lightsControlled, pulsesState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
     res.send('pulses');
-  } else if (text == 'sparkle') {
-
-    for (i in lightsControlled) {
-      lightWithDataAndNumber(pulseManyData, lightsControlled[i]);
-    }
-    res.send('sparkle');
   } else if (text == 'random') {
 
-    for (var i = 0; i < lightsControlled.length; i++) {
-      var tempData = {
-        on: true,
-        hue: getRandomArbitrary(0, 255),
-        sat: getRandomArbitrary(130, 255)
-      };
-      console.log(tempData);
-      lightWithDataAndNumber(tempData, lightsControlled[i]);
+    for (var i = 0; i < 25; i++) {
+
+      var randomColorState = lightState.create().on().rgb(getRandomArbitrary(0, 255), getRandomArbitrary(0, 255), getRandomArbitrary(0, 255));
+
+      api.setLightState(i, randomColorState) // provide a value of false to turn off
+      .then(displayResult)
+        .fail(displayError)
+        .done();
+
     }
     res.send('~*$random!@#~')
   } else if (text == 'colors') {
 
-    for (var i = 0; i < lightsControlled.length; i++) {
-      var tempData = {
-        on: true,
-        hue: getRandomArbitrary(0, 65535),
-        sat: getRandomArbitrary(220, 255)
-      };
-      console.log(tempData);
-      lightWithDataAndNumber(tempData, lightsControlled[i]);
+    for (var i = 0; i < 25; i++) {
+
+      var randomColorState = lightState.create().on().hsl(getRandomArbitrary(0, 359), 100, 100);
+
+      api.setLightState(i, randomColorState) // provide a value of false to turn off
+      .then(displayResult)
+        .fail(displayError)
+        .done();
+
     }
     res.send('~*$random colors!@#~')
+  } else if (hexFromText != undefined) {
+
+    var color = hexToRgb(hexFromText);
+
+    var hslColor = rgbToHsl(color[0],color[1],color[2]);
+    console.log(hslColor);  
+    var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],hslColor[2]);
+
+    api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
+
+    res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights commands: on, off, random, dimmest, dim, shady, bright, brightest, blue, green, orange, purple, normal, colors, sauron, party, pulse, pulses.  Choose the side of the room: /lights colors tv, /lights colors table, /lights colors oscar');
+    res.send('/lights commands: on, off, normal, colors, sauron, party, pulse, pulses.  Choose the side of the room: /lights colors tv, /lights colors table, /lights colors oscar');
   }
 
 });

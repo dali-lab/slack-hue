@@ -14,10 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.6.3",
+    "colornames": "0.0.2",
     "express": "^4.8.3",
+    "hex-rgb": "^1.0.0",
     "logfmt": "^1.1.2",
     "node-hue-api": "^1.0.5",
     "node-slackbot": "0.0.6",
+    "onecolor": "^2.5.0",
     "sleep": "^2.0.0"
   }
 }
