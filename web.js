@@ -183,7 +183,7 @@ app.post('/', function(req, res) {
     res.send('bightened!!');
   } else if (!isNaN(intFromText)) {
 
-    var whiteState = lightState.create().on().white(500, 100);
+    var whiteState = lightState.create().on().white(intFromText, 100);
 
     api.setGroupLightState(lightsControlled, whiteState) // provide a value of false to turn off
     .then(displayResult)
@@ -244,7 +244,7 @@ app.post('/', function(req, res) {
 
     var hslColor = rgbToHsl(color[0],color[1],color[2]);
     console.log(hslColor);  
-    var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],hslColor[2]);
+    var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
 
     api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
     .then(displayResult)
