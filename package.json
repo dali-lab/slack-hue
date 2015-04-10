@@ -16,6 +16,7 @@
     "body-parser": "^1.6.3",
     "express": "^4.8.3",
     "logfmt": "^1.1.2",
+    "node-hue-api": "^1.0.5",
     "node-slackbot": "0.0.6",
     "sleep": "^2.0.0"
   }
