@@ -55,8 +55,6 @@ var brightestState = lightState.create().bri(250);
 var pulseState = lightState.create().alertShort();
 var pulsesState = lightState.create().alertLong();
 
-
-
 function rgbToHsl(r, g, b){
     r /= 255, g /= 255, b /= 255;
     var max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -77,6 +75,47 @@ function rgbToHsl(r, g, b){
 
     return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)];
 }
+
+
+function RGBtoHSB(r, g, b) {
+  var hue, saturation, brightness;
+  var hsbvals = Array();
+  var cmax = (r > g) ? r : g;
+  if (b > cmax) cmax = b;
+  var cmin = (r < g) ? r : g;
+  if (b < cmin) cmin = b;
+  brightness = cmax;
+  if (cmax != 0)
+    saturation = (cmax - cmin) * 255 / cmax;
+  else
+    saturation = 0;
+  //println(cmax);
+  //println(cmin);
+  if (saturation == 0)
+    hue = DEFAULT_HUE;
+  else {
+    // Need to be fixed!
+    var tempHue;
+    var redc = ((cmax - r)) / ((cmax - cmin));
+    var greenc = ((cmax - g)) / ((cmax - cmin));
+    var bluec = ((cmax - b)) / ((cmax - cmin));
+    if (r == cmax)
+      tempHue = bluec - greenc;
+    else if (g == cmax)
+      tempHue = 2.0 + redc - bluec;
+    else
+      tempHue = 4.0 + greenc - redc;
+    tempHue = tempHue / 6.0;
+    if (tempHue < 0)
+      tempHue = tempHue + 1.0;
+    hue = (tempHue * 65535);
+  }
+  hsbvals[0] = hue;
+  hsbvals[1] = saturation;
+  hsbvals[2] = brightness;
+  return hsbvals;
+}
+
 
 app.post('/', function(req, res) {
 
@@ -119,11 +158,13 @@ app.post('/', function(req, res) {
   }
 
   if (text == 'on') {
-    res.send('lights on');
 
-    for (var i = 0; i < lightsControlled.length; i++) {
-      lightWithDataAndNumber(onData, lightsControlled[i]);
-    }
+  api.setGroupLightState(lightsControlled, onState) 
+  .then(displayResult)
+    .fail(displayError)
+    .done();
+
+  res.send('lights on');
 
   } else if (text == 'tv') {
     shouldTV = true;
@@ -242,14 +283,14 @@ app.post('/', function(req, res) {
 
     var color = hexToRgb(hexFromText);
 
-    var hslColor = rgbToHsl(color[0],color[1],color[2]);
+    var hslColor = RGBtoHSB(color[0],color[1],color[2]);
     console.log(hslColor);  
-    var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
+    // var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
 
-    api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
-    .then(displayResult)
-      .fail(displayError)
-      .done();
+    // api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
+    // .then(displayResult)
+      // .fail(displayError)
+      // .done();
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
