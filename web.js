@@ -285,12 +285,12 @@ app.post('/', function(req, res) {
 
     var hslColor = RGBtoHSB(color[0],color[1],color[2]);
     console.log(hslColor);  
-    // var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
+    var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
 
-    // api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
-    // .then(displayResult)
-      // .fail(displayError)
-      // .done();
+    api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
+    .then(displayResult)
+      .fail(displayError)
+      .done();
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
