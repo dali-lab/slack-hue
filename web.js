@@ -283,7 +283,7 @@ app.post('/', function(req, res) {
 
     var color = hexToRgb(hexFromText);
 
-    var hslColor = RGBtoHSB(color[0],color[1],color[2]);
+    var hslColor = rgbToHsl(color[0],color[1],color[2]);
     console.log(hslColor);  
     var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
 
