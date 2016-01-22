@@ -299,7 +299,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights [command] [location (optional)]:\nCommands\n' + states.join('\n') + '\nLocations:\n' + locations.join('\n'));
+    res.send('/lights [command] [location (optional)]:\nCommands: ' + states.join(', ') + '\nLocations: ' + locations.join(', '));
   }
 
 });
