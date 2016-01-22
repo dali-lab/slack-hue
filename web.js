@@ -42,7 +42,7 @@ function getRandomArbitrary(min, max) {
 }
 
 
-var normalState = lightState.create().on().white(500, 100);
+var normalState = lightState.create().on().white(350, 100);
 var onState = lightState.create().on();
 var offState = lightState.create().off();
 var partyState = lightState.create().on().colorLoop();
@@ -54,6 +54,9 @@ var brightestState = lightState.create().bri(250);
 
 var pulseState = lightState.create().alertShort();
 var pulsesState = lightState.create().alertLong();
+
+var states = ["normal", "on", "off", "party", "dimmest", "dim", "shady",
+"bright", "brightest", "pulse", "pulses"];
 
 function rgbToHsl(r, g, b){
     r /= 255, g /= 255, b /= 255;
@@ -159,7 +162,7 @@ app.post('/', function(req, res) {
 
   if (text == 'on') {
 
-  api.setGroupLightState(lightsControlled, onState) 
+  api.setGroupLightState(lightsControlled, onState)
   .then(displayResult)
     .fail(displayError)
     .done();
@@ -231,7 +234,7 @@ app.post('/', function(req, res) {
       .fail(displayError)
       .done();
 
-    res.send('set white point:' + intFromText);
+    res.send('set white point: ' + intFromText);
   } else if (text == 'normal') {
 
     api.setGroupLightState(lightsControlled, normalState) // provide a value of false to turn off
@@ -284,7 +287,7 @@ app.post('/', function(req, res) {
     var color = hexToRgb(hexFromText);
 
     var hslColor = rgbToHsl(color[0],color[1],color[2]);
-    console.log(hslColor);  
+    console.log(hslColor);
     var namedColorState = lightState.create().on().hsl(hslColor[0],hslColor[1],90);
 
     api.setGroupLightState(lightsControlled, namedColorState) // provide a value of false to turn off
@@ -294,7 +297,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights commands: on, off, normal, colors, sauron, party, pulse, pulses.  Choose the side of the room: /lights colors tv, /lights colors table, /lights colors oscar');
+    res.send('/lights commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
   }
 
 });
