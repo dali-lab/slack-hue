@@ -54,11 +54,11 @@ var shadyState = lightState.create().bri(150);
 var brightState = lightState.create().bri(200);
 var brightestState = lightState.create().bri(250);
 
-var pulseState = lightState.create().alertShort();
+var flashState = lightState.create().alertShort();
 var pulsesState = lightState.create().alertLong();
 
 var states = ["normal", "on", "off", "party", "dimmest", "dim", "shady",
-"bright", "brightest", "pulse", "pulses"];
+"bright", "brightest", "flash", "pulses"];
 
 function rgbToHsl(r, g, b){
     r /= 255, g /= 255, b /= 255;
@@ -163,7 +163,6 @@ app.post('/', function(req, res) {
   }
 
   if (text == 'on') {
-
     api.setGroupLightState(lightsControlled, onState)
       .then(displayResult)
       .fail(displayError)
@@ -174,28 +173,30 @@ app.post('/', function(req, res) {
   } else if (text == 'tv') {
     shouldTV = true;
     res.send('tv');
+
   } else if (text == 'off') {
 
     api.setGroupLightState(lightsControlled, offState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
-
     res.send('lights off');
+
   } else if (text == 'party') {
 
     api.setGroupLightState(lightsControlled, partyState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
-
     res.send('party!');
+
   } else if (text == 'dim') {
 
     api.setGroupLightState(lightsControlled, dimState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
+    res.send('dim ;)');
 
   } else if (text == 'dimmest') {
 
@@ -203,30 +204,31 @@ app.post('/', function(req, res) {
     .then(displayResult)
       .fail(displayError)
       .done();
-
     res.send('dimmed ;)');
+
   } else if (text == 'shady') {
 
     api.setGroupLightState(lightsControlled, shadyState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
-
     res.send('shady');
+
   } else if (text == 'bright') {
 
     api.setGroupLightState(lightsControlled, brightState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
-
     res.send('bightened');
+
   } else if (text == 'brightest') {
     api.setGroupLightState(lightsControlled, brightestState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
     res.send('bightened!!');
+
   } else if (!isNaN(intFromText)) {
 
     var whiteState = lightState.create().on().white(intFromText, 100);
@@ -235,8 +237,8 @@ app.post('/', function(req, res) {
     .then(displayResult)
       .fail(displayError)
       .done();
+    res.send('white point set (154 - 500): ' + intFromText);
 
-    res.send('set white point: ' + intFromText);
   } else if (text == 'normal') {
 
     api.setGroupLightState(lightsControlled, normalState) // provide a value of false to turn off
@@ -244,13 +246,15 @@ app.post('/', function(req, res) {
       .fail(displayError)
       .done();
     res.send('normal');
-  } else if (text == 'pulse') {
 
-    api.setGroupLightState(lightsControlled, pulseState) // provide a value of false to turn off
+  } else if (text == 'flash') {
+
+    api.setGroupLightState(lightsControlled, flashState) // provide a value of false to turn off
     .then(displayResult)
       .fail(displayError)
       .done();
     res.send('pulse');
+
   } else if (text == 'pulses') {
 
     api.setGroupLightState(lightsControlled, pulsesState) // provide a value of false to turn off
@@ -258,10 +262,10 @@ app.post('/', function(req, res) {
       .fail(displayError)
       .done();
     res.send('pulses');
+
   } else if (text == 'random') {
 
     for (var i = 0; i < 25; i++) {
-
       var randomColorState = lightState.create().on().rgb(getRandomArbitrary(0, 255), getRandomArbitrary(0, 255), getRandomArbitrary(0, 255));
 
       api.setLightState(i, randomColorState) // provide a value of false to turn off
@@ -271,6 +275,7 @@ app.post('/', function(req, res) {
 
     }
     res.send('~*$random!@#~')
+
   } else if (text == 'colors') {
 
     for (var i = 0; i < 25; i++) {
@@ -284,6 +289,7 @@ app.post('/', function(req, res) {
 
     }
     res.send('~*$random colors!@#~')
+
   } else if (hexFromText != undefined) {
 
     var color = hexToRgb(hexFromText);
@@ -298,7 +304,9 @@ app.post('/', function(req, res) {
       .done();
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
-  } else {
+
+  } else { //help
+
     res.send('/lights [command] [location (optional)]:\nCommands: ' + states.join(', ') + '\nLocations: ' + locations.join(', '));
   }
 
