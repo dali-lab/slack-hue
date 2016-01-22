@@ -297,7 +297,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights PAT commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
+    res.send('/lights FUN commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
   }
 
 });
