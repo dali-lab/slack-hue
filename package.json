@@ -1,8 +1,12 @@
 {
   "name": "dali-lights",
   "version": "0.0.0",
-  "description": "",
+  "description": "dali slack lights integration",
   "main": "web.js",
+  "engines": {
+    "node": "0.12.2",
+    "npm": "2.10.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,13 +18,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.6.3",
-    "colornames": "0.0.2",
+    "colornames": "^1.0.1",
     "express": "^4.8.3",
+    "function-rate-limit": "0.0.1",
     "hex-rgb": "^1.0.0",
     "logfmt": "^1.1.2",
-    "node-hue-api": "^1.0.5",
-    "node-slackbot": "0.0.6",
-    "onecolor": "^2.5.0",
-    "sleep": "^2.0.0"
+    "node-hue-api": "2.0.1",
+    "node-slackbot": "0.0.6"
   }
 }

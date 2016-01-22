@@ -6,7 +6,9 @@ var logfmt = require("logfmt");
 var app = express();
 var bodyParser = require('body-parser')
 app.use(bodyParser.json()); // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded()); // to support URL-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+  extended: true
+}));
 var http = require('http'); //the variable doesn't necessarily have to be named http
 app.use(logfmt.requestLogger());
 
@@ -297,7 +299,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights FUN commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
+    res.send('/lights commands: Choose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
   }
 
 });
