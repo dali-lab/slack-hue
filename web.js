@@ -36,7 +36,7 @@ var api = new HueApi(hostname, username);
 var oscarLights = 2;
 var centerLights = 3;
 var tvLights = 4;
-//
+var locations = ['oscar', 'center','tv'];
 
 
 function getRandomArbitrary(min, max) {
@@ -299,7 +299,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights commands: TODO Choose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
+    res.send('/lights commands:\n' + states.join('\n') + 'Choose the side of the room: /lights [command] [location] \n' + locations.join('\n'));
   }
 
 });
