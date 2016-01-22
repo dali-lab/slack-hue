@@ -162,12 +162,12 @@ app.post('/', function(req, res) {
 
   if (text == 'on') {
 
-  api.setGroupLightState(lightsControlled, onState)
-  .then(displayResult)
-    .fail(displayError)
-    .done();
+    api.setGroupLightState(lightsControlled, onState)
+      .then(displayResult)
+      .fail(displayError)
+      .done();
 
-  res.send('lights on');
+    res.send('lights on');
 
   } else if (text == 'tv') {
     shouldTV = true;
@@ -297,7 +297,7 @@ app.post('/', function(req, res) {
 
     res.send('set to hex value: ' + hexFromText + 'for color: ' + text);
   } else {
-    res.send('/lights commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
+    res.send('/lights PAT commands:\n' + states.join(" ") + '\nChoose the side of the room: /lights [command] tv, /lights [command] table, /lights [command] oscar');
   }
 
 });
