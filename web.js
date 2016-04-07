@@ -44,7 +44,7 @@ function getRandomArbitrary(min, max) {
 }
 
 
-var normalState = lightState.create().on().white(350, 100);
+var normalState = lightState.create().on().white(325, 100);
 var onState = lightState.create().on();
 var offState = lightState.create().off();
 var partyState = lightState.create().on().colorLoop();
