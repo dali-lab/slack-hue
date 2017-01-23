@@ -37,7 +37,7 @@ const displayError = (err) => {
 
 const config = {};
 
-async function fetchLightGroups(api) {
+const fetchLightGroups = (api) => {
   return api.scenes().then((res) => {
     return res.slice(1)
     .map((g) => { return { name: g.name.toLowerCase(), id: g.id, owner: g.owner, lights: g.lights.sort().join() }; });
@@ -50,7 +50,7 @@ async function fetchLightGroups(api) {
       });
     });
   });
-}
+};
 
 // get configs for all the apis (every hue controller)
 apis.forEach((api) => { fetchLightGroups(api); });
@@ -95,9 +95,7 @@ app.post('/', (req, res) => {
   } else if (location && hex) {
     // if there is a converted hex color then add some saturation and set that color
     const color = tinycolor(hex).saturate(98);
-    console.log(color);
     const hslColor = color.toHsl();
-    console.log(hslColor);
     const namedColorState = lightState.create().on().hsl(hslColor.h, hslColor.s * 100, hslColor.l * 100);
     config[location].api.setGroupLightState(config[location].id, namedColorState)
       .then(displayResult)
