@@ -4,8 +4,8 @@
   "description": "dali slack lights integration",
   "main": "src/server.js",
   "engines": {
-    "node": "6.9.1",
-    "npm": "3.10.8"
+    "node": "7.4.0",
+    "npm": "4.0.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
