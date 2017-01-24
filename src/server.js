@@ -59,6 +59,8 @@ const extraStates = {
   party: lightState.create().on().colorLoop(),
   flash: lightState.create().alertShort(),
   pulse: lightState.create().alertLong(),
+  off: lightState.create().turnOff(),
+  on: lightState.create().turnOn(),
 };
 
 
@@ -75,13 +77,52 @@ app.post('/', (req, res) => {
   const hex = colornames(scene);
   console.log(`hex: ${hex}`);
 
-  const simpleconfig = {}; // for print
-  Object.entries(config).forEach(([k, v]) => { simpleconfig[k] = _.sortedUniq(v.scenes.map((s) => { return s.name.toLowerCase(); }).sort()); });
-
   // check if scene to active is a possible option
   const sceneToActivate = (location in config) ? config[location].scenes.filter((s) => { return s.name === scene; })[0] : null;
 
-  if (location in config && sceneToActivate) {
+  // find intersection in all the scenes for global changes
+  const sceneIntersection = _.intersection(...Object.values(config).map((x) => { return x.scenes.map((y) => { return y.name; }); }));
+
+  const inIntersection = sceneIntersection.find((x) => { return x === scene; });
+  const inExtras = (scene in extraStates);
+
+  const simpleconfig = {}; // for print
+  Object.entries(config).forEach(([k, v]) => { simpleconfig[`*${k}*`] = _.sortedUniq(v.scenes.map((s) => { return `_${s.name.toLowerCase()}_`; }).sort()); });
+  simpleconfig['*all*'] = Object.keys(extraStates).concat(sceneIntersection);
+
+
+  if (location === 'all' && (inExtras || inIntersection)) {
+    console.log('lets do it all');
+    const todo = [];
+    // wrap a loop of api calls to be executed later
+    // either for specific scenes or extra commands
+    const wrap = (loc, sceneid) => {
+      if (inExtras) {
+        return new Promise((resolve, reject) => {
+          loc.api.setGroupLightState(loc.id, extraStates[scene])
+            .then((res) => { return resolve(res); })
+            .catch((err) => { return reject(err); });
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+          loc.api.activateScene(sceneid)
+            .then((res) => { return resolve(res); })
+            .catch((err) => { return reject(err); });
+        });
+      }
+    };
+    // find each individual scene in each location and construct a bunch of promises for it.
+    Object.values(config).forEach((loc) => {
+      const newscene = loc.scenes.find((x) => { return x.name === scene; });
+      const sceneid = (newscene && 'id' in newscene) ? newscene.id : null;
+      todo.push(wrap(loc, sceneid));
+    });
+    Promise.all(todo).then(() => {
+      res.send('Can do!');
+    }).catch((error) => {
+      res.send(`error: ${error}`);
+    });
+  } else if (location in config && sceneToActivate) {
     console.log(`location ${location} and scene ${sceneToActivate.name} verified`);
     config[location].api.activateScene(sceneToActivate.id)
       .then(displayResult)
